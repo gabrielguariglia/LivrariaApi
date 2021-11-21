@@ -1,8 +1,8 @@
-//selecionar database
-use('LivrariaDataBase')
+//Selecione o database
+use('LabBD')
 
-//remover collection
-db.livros.drop()
+// Remove a collection
+db.livros.drop() 
 
 //Cria a collection com a validação do schema
 db.createCollection('livros', {
@@ -45,3 +45,24 @@ db.createCollection('livros', {
     validationLevel: 'strict', //moderate or off
     validationAction: 'error' //warn
  )
+
+//Insere um novo registro
+db.livros.insertOne(
+    {
+
+      "nome": "Harry Potter e a pedra filosofal",
+      "gênero" : "Fantasia",
+      "autor" : " J. K. Rowling",
+      "lançamento": 1997,
+       "nPaginas":200
+
+    }
+
+)
+
+//Lista todos os registros
+db.livros.find()
+//Lista um registro pelo Id
+db.livros.find({"_id": {$eq: ObjectId("BOTAR O ID")}})
+
+db.livros.find({nome: //i})
