@@ -11,13 +11,13 @@ const { db, ObjectId } = await connectToDatabase()
  * Validações
  * 
  **********************************************/
-const validaLivro = [
-  check('nome', 'Nome do Livro é obrigatório').not().isEmpty(),
-  check('tipo', 'O tipo de ser Admin, Livro ou Professor').isIn(['Admin', 'Livro', 'Professor']),
-  check('anoGraduação', 'O ano de graduação deve estar entre 2021 e 2050').isInt({ min: 2021, max: 2050 }),
-  check('notaMédia', 'A nota média deve ser um número').isNumeric()
+ const validaLivros = [
+    check('nome', 'Nome do livro é obrigatório').not().isEmpty(),
+    check('gênero', 'Gênero do livro é obrigatório').isIn(['Admin', 'Estudante', 'Professor']),
+    check('autor', 'O nome deve ser um campo de texto').isIn(['Admin', 'Estudante', 'Professor']),
+    check(' lançamento', 'Ano deve ser um inteiro entre [ ano 1 até o ano de 2021]').isInt({ min: 1, max: 2021 }),
+    check('nPaginas', 'Informe o número de paginas do livo').isInt()
 ]
-
 
 /**********************************************
  * GET /livros/
@@ -77,7 +77,7 @@ router.get("/nome/:nome", async (req, res) => {
  * POST /livros/
  * Inclui um novo Livro
  **********************************************/
-router.post('/', validaLivro, async (req, res) => {
+router.post('/', validaLivros, async (req, res) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
     return res.status(400).json(({
@@ -95,7 +95,7 @@ router.post('/', validaLivro, async (req, res) => {
  * PUT /livros/
  * Alterar um Livro pelo ID
  **********************************************/
-router.put('/', validaLivro, async (req, res) => {
+router.put('/', validaLivros, async (req, res) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
     return res.status(400).json(({
