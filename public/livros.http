@@ -1,8 +1,8 @@
 //Teste de Requisições REST - livros
-@baseURL = http://localhost:4000
+@baseURL = http://localhost:4000/
 @id = 
 ###
-//Lista todos os livros
+// Lista todos os livros
 GET {{baseURL}}/livros
 Content-Type: application/json
 
@@ -16,9 +16,17 @@ Content-Type: application/json
 POST {{baseURL}}/livros
 Content-Type: application/json
 
-{
-   
-}
+ {
+
+      "nome": "Harry Potter e a pedra filosofal",
+      "gênero" : "Fantasia",
+      "autor" : " J. K. Rowling",
+      "lançamento": 1997,
+      "nPaginas":200
+
+    }
+
+)
 
 ### 
 //Apaga um livro através do id informado
@@ -31,7 +39,11 @@ PUT {{baseURL}}/livros/
 Content-Type: application/json
 
 {
-    
-}
+    "_id": "6189235f82d2feac0c76f955", 
+     "nome": "Harry Potter e a pedra filosofal",
+      "gênero" : "Fantasia",
+      "autor" : " J. K. Rowling",
+      "lançamento": 1997,
+       "nPaginas":200
 
-
+     }

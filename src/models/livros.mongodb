@@ -1,5 +1,5 @@
 //Selecione o database
-use('LabBD')
+use('LivrariaDataBase')
 
 // Remove a collection
 db.livros.drop() 
@@ -9,7 +9,7 @@ db.createCollection('livros', {
     validator: {
        $jsonSchema: {
           bsonType: 'object',
-          required: [ 'nome', 'gênero', 'autor', 'lançamento', 'ano', 'capaDura', 'nPaginas' ],
+          required: [ 'nome', 'gênero', 'autor', 'lançamento', 'nPaginas' ],
           properties: {
              nome: {
                 bsonType: 'string',
@@ -22,7 +22,7 @@ db.createCollection('livros', {
 
            autor  : {
                 bsonType: 'string',
-                description: 'O nome deve ser um campo de texto'
+                description: 'O nome do autor é obrigátorio'
              },
 
              lançamento: {
@@ -39,25 +39,20 @@ db.createCollection('livros', {
 
                 }
              }
-          }
-       }
-    ,
+    },
     validationLevel: 'strict', //moderate or off
     validationAction: 'error' //warn
- )
+})
 
 //Insere um novo registro
 db.livros.insertOne(
     {
-
       "nome": "Harry Potter e a pedra filosofal",
       "gênero" : "Fantasia",
       "autor" : " J. K. Rowling",
       "lançamento": 1997,
-       "nPaginas":200
-
+      "nPaginas":200
     }
-
 )
 
 //Lista todos os registros
