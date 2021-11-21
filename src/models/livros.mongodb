@@ -1,0 +1,47 @@
+//selecionar database
+use('LivrariaDataBase')
+
+//remover collection
+db.livros.drop()
+
+//Cria a collection com a validação do schema
+db.createCollection('livros', {
+    validator: {
+       $jsonSchema: {
+          bsonType: 'object',
+          required: [ 'nome', 'gênero', 'autor', 'lançamento', 'ano', 'capaDura', 'nPaginas' ],
+          properties: {
+             nome: {
+                bsonType: 'string',
+                description: 'Nome é obrigatório'
+             },
+             gênero: {
+                bsonType: 'string',
+                description: 'Gênero é obrigatório'
+             },
+
+           autor  : {
+                bsonType: 'string',
+                description: 'O nome deve ser um campo de texto'
+             },
+
+             lançamento: {
+                bsonType: 'int',
+                minimum: 1,
+                maximum: 2021,
+                description: 'Ano deve ser um inteiro entre [ ano 1 até o ano de 2021]'
+             },
+              nPaginas: {
+                bsonType: 'int',
+                description: ' Informe o número de paginas do livo '
+             }
+
+
+                }
+             }
+          }
+       }
+    ,
+    validationLevel: 'strict', //moderate or off
+    validationAction: 'error' //warn
+ )
