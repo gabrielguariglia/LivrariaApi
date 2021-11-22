@@ -13,9 +13,9 @@ const { db, ObjectId } = await connectToDatabase()
  **********************************************/
  const validaLivros = [
     check('nome', 'Nome do livro é obrigatório').not().isEmpty(),
-    check('gênero', 'Gênero do livro é obrigatório').isIn(['Admin', 'Estudante', 'Professor']),
-    check('autor', 'O nome deve ser um campo de texto').isIn(['Admin', 'Estudante', 'Professor']),
-    check(' lançamento', 'Ano deve ser um inteiro entre [ ano 1 até o ano de 2021]').isInt({ min: 1, max: 2021 }),
+    check('gênero', 'Gênero do livro é obrigatório').not().isEmpty(),
+    check('autor', 'O nome deve ser um campo de texto').not().isEmpty(),
+    check('lançamento', 'Ano deve ser um inteiro entre [ ano 1 até o ano de 2021]').isInt({ min: 1, max: 2021 }),
     check('nPaginas', 'Informe o número de paginas do livo').isInt()
 ]
 
@@ -90,6 +90,7 @@ router.post('/', validaLivros, async (req, res) => {
       .catch(err => res.status(400).json(err))
   }
 })
+
 
 /**********************************************
  * PUT /livros/
